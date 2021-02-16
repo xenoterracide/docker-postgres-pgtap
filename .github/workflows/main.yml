@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/get-tag
+      - uses: .github/actions/get-tag
         id: get-tag
         with:
           version: ${{ matrix.pg_version }}
@@ -27,6 +27,6 @@ jobs:
             --build-arg \
               PG_VERSION=${{ matrix.pg_version }} \
               PGTAP_VERSION=${{ matrix.pgtap_version }} \
-            --tag ${{ steps.get-tag.tag }} \
+            --tag ${{ steps.get-tag.outputs.tag }} \
             ${{ matrix.pg_base_image }}.Dockerfile
 
