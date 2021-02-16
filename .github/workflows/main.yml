@@ -23,6 +23,8 @@ jobs:
           pgtap-version: ${{ matrix.pgtap-version }}
           base-image: ${{ matrix.pg-base-image }}
       - name: docker build
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           docker build \
             --build-arg PG_VERSION=${{ matrix.pg-version }} \
