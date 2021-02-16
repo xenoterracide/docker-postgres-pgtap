@@ -8,7 +8,7 @@ inputs:
     description: postgres base image
     required: true
 outputs:
-  image-tag:
+  tag:
     description: postgres image tag
     value: ${{ steps.image-tag.tag }}
 runs:
