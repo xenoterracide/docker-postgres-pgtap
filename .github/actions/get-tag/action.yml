@@ -28,8 +28,8 @@ runs:
           echo "::set-output name=tag::${version}"
         fi
       env:
-        VERSION: ${{ input.version }}
-        BASE_IMAGE: ${{ input.base-image }}
+        VERSION: ${{ inputs.version }}
+        BASE_IMAGE: ${{ inputs.base-image }}
       shell: bash
 
 
