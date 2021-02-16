@@ -27,7 +27,7 @@ jobs:
           docker build \
             --build-arg PG_VERSION=${{ matrix.pg-version }} \
             --build-arg PGTAP_VERSION=${{ matrix.pgtap-version }} \
-            --tag ${{ steps.get-tag.outputs.tag }}-${{ matrix.pgtap-version }} \
+            --tag "${{ steps.get-tag.outputs.tag }}-${{ matrix.pgtap-version }}" \
             --file ${{ matrix.pg-base-image }}.Dockerfile \
             .
 
