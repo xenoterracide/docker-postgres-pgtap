@@ -20,7 +20,6 @@ jobs:
         id: get-tag
         with:
           pg-version: ${{ matrix.pg-version }}
-          pgtap-version: ${{ matrix.pgtap-version }}
           base-image: ${{ matrix.pg-base-image }}
       - name: docker build
         env:
