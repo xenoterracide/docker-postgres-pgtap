@@ -27,7 +27,7 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           docker build \
-            --build-arg PG_VERSION=${{ steps.get-tag.outputs.tag }} \
+            --build-arg POSTGRES_VERSION=${{ steps.get-tag.outputs.tag }} \
             --build-arg PGTAP_VERSION=${{ matrix.pgtap-version }} \
             --tag ${{ steps.get-tag.outputs.tag }}-${{ matrix.pgtap-version }} \
             --file ${{ matrix.pg-base-image }}.Dockerfile \

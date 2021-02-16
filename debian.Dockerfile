@@ -1,5 +1,5 @@
-ARG PG_VERSION
-FROM postgres:$PG_VERSION AS builder
+ARG POSTGRES_VERSON
+FROM postgres:$POSTGRES_VERSON AS builder
 ARG PGTAP_VERSION
 RUN apt-get update
 RUN apt-get -y install build-essential git perl wget unzip
@@ -9,8 +9,8 @@ WORKDIR pgtap-$PGTAP_VERSION
 RUN make
 RUN make install
 
-FROM postgres:$PG_VERSION
-ENV DEST /usr/share/postgresql/$PG_VERSION/extension
+FROM postgres:$POSTGRES_VERSON
+ENV DEST /usr/share/postgresql/$POSTGRES_VERSON/extension
 COPY --from=builder $DEST $DEST
 ENTRYPOINT ["docker-entrypoint.sh"]
 
