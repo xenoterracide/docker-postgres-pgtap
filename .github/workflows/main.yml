@@ -15,8 +15,8 @@ jobs:
     # Set the type of machine to run on
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/base-image
-        id: image-tag
+      - uses: ./.github/actions/get-tag
+        id: get-tag
         with:
           version: ${{ matrix.pg_version }}
           base-image: ${{ matrix.pg_base_image }}
@@ -26,6 +26,6 @@ jobs:
             --build-arg \
               PG_VERSION=${{ matrix.pg_version }} \
               PGTAP_VERSION=${{ matrix.pgtap_version }} \
-            --tag ${{ steps.image-tag.tag }} \
+            --tag ${{ steps.get-tag.tag }} \
             ${{ matrix.pg_base_image }}.Dockerfile
 

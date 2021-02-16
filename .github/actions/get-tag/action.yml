@@ -1,4 +1,4 @@
-name: base-image
+name: get-tag
 description: create the correct upstream image name and export
 inputs:
   version:
@@ -10,7 +10,7 @@ inputs:
 outputs:
   image-tag:
     description: postgres image tag
-      value: ${{ steps.image-tag.tag }}
+    value: ${{ steps.image-tag.tag }}
 runs:
   using: composite
   steps:
