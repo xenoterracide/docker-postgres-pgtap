@@ -16,7 +16,7 @@ runs:
   steps:
     - id: image-tag
       run: |
-        version="${VERSION}"
+        version="${PG_VERSION}"
         baseimage="${BASE_IMAGE}"
         if [ ${baseimage} == "alpine" ]; then
             if [ ${version} == "latest" ]; then
