@@ -1,5 +1,5 @@
-ARG PG_VERSION
-FROM postgres:$PG_VERSION AS builder
+ARG POSTGRES_VERSION
+FROM postgres:$POSTGRES_VERSION AS builder
 ARG PGTAP_VERSION
 RUN apk add --no-cache build-base git perl wget unzip
 RUN wget --no-verbose http://api.pgxn.org/dist/pgtap/$PGTAP_VERSION/pgtap-$PGTAP_VERSION.zip
@@ -8,7 +8,7 @@ WORKDIR pgtap-$PGTAP_VERSION
 RUN make
 RUN make install
 
-FROM postgres:$PG_VERSION
+FROM postgres:$POSTGRES_VERSION
 ENV DEST /usr/local/share/postgresql/extension/
 COPY --from=builder $DEST $DEST
 ENTRYPOINT ["docker-entrypoint.sh"]
