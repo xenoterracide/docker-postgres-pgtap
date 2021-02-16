@@ -4,7 +4,7 @@ inputs:
   version:
     description: postgres version
     required: true
-  base_image:
+  base-image:
     description: postgres base image
     required: true
 outputs:
