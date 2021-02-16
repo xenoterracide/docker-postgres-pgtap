@@ -1,0 +1,35 @@
+name: base-image
+description: create the correct upstream image name and export
+inputs:
+  version:
+    description: postgres version
+    required: true
+  base_image:
+    description: postgres base image
+    required: true
+outputs:
+  image-tag:
+    description: postgres image tag
+      value: ${{ steps.image-tag.tag }}
+runs:
+  using: composite
+  steps:
+    - id: image-tag
+      run: |
+        version="${VERSION}"
+        baseimage="${BASE_IMAGE}"
+        if [ ${baseimage} == "alpine" ]; then
+            if [ ${version} == "latest" ]; then
+                echo "::set-output name=tag::alpine"
+            else
+                echo "::set-output name=tag::${version}-alpine"
+            fi
+        else
+          echo "::set-output name=tag::${version}"
+        fi
+      env:
+        VERSION: ${{ input.version }}
+        BASE_IMAGE: ${{ input.base-image }}
+      shell: bash
+
+

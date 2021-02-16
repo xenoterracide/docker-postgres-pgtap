@@ -1,0 +1,31 @@
+name: Main
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  build:
+    strategy:
+      matrix:
+        pg_version: [ '9.5', '9.6', '10', '11', '12', '13', 'latest' ]
+        pg_base_image: [ 'alpine', 'debian' ]
+        pgtap_version: [ '1.1.0' ]
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+    steps:
+      - using: .github/actions/base-image
+        id: image-tag
+        with:
+          version: ${{ matrix.pg_version }}
+          base-image: ${{ matrix.pg_base_image }}
+      - name: docker build
+        run: |
+          docker build \
+            --build-arg \
+              PG_VERSION=${{ matrix.pg_version }} \
+              PGTAP_VERSION=${{ matrix.pgtap_version }} \
+            --tag ${{ steps.image-tag.tag }} \
+            ${{ matrix.pg_base_image }}.Dockerfile
+
