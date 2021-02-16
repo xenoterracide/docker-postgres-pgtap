@@ -1,7 +1,7 @@
 name: get-tag
 description: create the correct upstream image name and export
 inputs:
-  version:
+  pg-version:
     description: postgres version
     required: true
   base-image:
@@ -28,7 +28,7 @@ runs:
           echo "::set-output name=tag::${version}"
         fi
       env:
-        VERSION: ${{ inputs.version }}
+        PG_VERSION: ${{ inputs.pg-version }}
         BASE_IMAGE: ${{ inputs.base-image }}
       shell: bash
 
