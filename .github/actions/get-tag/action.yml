@@ -10,7 +10,7 @@ inputs:
 outputs:
   tag:
     description: postgres image tag
-    value: ${{ steps.image-tag.tag }}
+    value: ${{ steps.image-tag.outputs.tag }}
 runs:
   using: composite
   steps:
