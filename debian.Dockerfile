@@ -10,8 +10,7 @@ RUN make
 RUN make install
 
 FROM postgres:$POSTGRES_VERSION
-ARG POSTGRES_VERSION
-ENV DEST /usr/share/postgresql/$POSTGRES_VERSION/extension
+ENV DEST /usr/share/postgresql/$(psql -V | awk -F '{ print $0 "." $1 }')/extension
 COPY --from=builder $DEST $DEST
 ENTRYPOINT ["docker-entrypoint.sh"]
 
